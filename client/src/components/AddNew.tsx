@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { VscAdd } from "react-icons/vsc";
 
-const AddNew = () => {
+interface Props {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}
+
+const AddNew: FC<Props> = ({onClick}) => {
   return (
-    <div className="item addnew">
+    <div className="item open-modal" onClick={onClick}>
       <VscAdd />
     </div>
   )

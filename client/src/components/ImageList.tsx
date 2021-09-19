@@ -1,4 +1,5 @@
 import { FC, useState } from "react"
+import { VscAdd } from "react-icons/vsc";
 import AddNew from "./AddNew"
 import Image from "./Image"
 
@@ -51,18 +52,25 @@ const ImageList: FC = () => {
       imgData: './images/lime.svg'
     }
   ])
-  const handleAddNew = () => {}
+
+  const openModal = () => {
+    console.log('Modal opened')
+  }
+
+  
   
 
   return (
     <>
       <div className="gallery">
-        <AddNew />
+        {/* <AddNew onClick={openModal}/> */}
+        <div className="item open-modal" onClick={openModal}>
+          <VscAdd />
+        </div>
         {images.map((image, index) => (
           <Image image={image}/>
-        ))}      
-      </div>
-      <div className="add-modal"></div>
+        ))}             
+      </div>      
     </>
   )
 }

@@ -54,6 +54,7 @@ h1.heading {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
   margin-bottom: 40px;
+  position: relative;
 }
 
 .gallery .item {
@@ -105,11 +106,49 @@ h1.heading {
   width: 30px;
 }
 
-.addnew {
+.open-modal {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 100px;
+  cursor: pointer;
+  border: 1px solid red;
+}
+
+.app {
+  position: relative;
+  height: 100vh;
+}
+
+.add-image-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+}
+
+.add-image-modal {
+  position: absolute;
+  width: 400px;
+  height: 380px;
+  padding: 20px;
+  background: var(--white);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-image-modal .add-image-icon {
+  display: inline-block;
+  font-size: 40px;
+  background: var(--lime);
+  padding: 20px;
 }
 
 @media (max-width: 700px) {
