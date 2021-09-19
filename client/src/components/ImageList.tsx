@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import './App.css';
-import ImageList from './components/ImageList';
-import Nav from './components/Nav';
+import { FC, useState } from "react"
+import AddNew from "./AddNew"
+import Image from "./Image"
 
-export interface Item {
+interface Item {
   fileName: string,
   fileSize: number,
   imgWidth: number,
@@ -12,7 +11,12 @@ export interface Item {
   imgData: string
 }
 
-const App = () => {
+interface Props {
+  images: Item[]
+}
+
+
+const ImageList: FC = () => {
   const [images, setImages] = useState<Item[]>([
     {
       fileName: 'Apple',
@@ -47,16 +51,20 @@ const App = () => {
       imgData: './images/lime.svg'
     }
   ])
+  const handleAddNew = () => {}
+  
 
   return (
-    <div>
-      <Nav />
-      <div className="container">
-        <h1 className="heading">Uploaded Images</h1>
-        <ImageList />
+    <>
+      <div className="gallery">
+        <AddNew />
+        {images.map((image, index) => (
+          <Image image={image}/>
+        ))}      
       </div>
-    </div>
-  );
+      <div className="add-modal"></div>
+    </>
+  )
 }
 
-export default App;
+export default ImageList
