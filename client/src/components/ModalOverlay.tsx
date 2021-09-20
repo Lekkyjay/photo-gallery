@@ -27,8 +27,13 @@ const ModalOverlay = () => {
 
         <div className="desc">
           <p>Description</p>
-          <textarea name="desc" cols={40} rows={6}></textarea>
+          <textarea name="desc" cols={40} rows={8}></textarea>
         </div>
+        <div className="modal-footer">
+          <small>By uploading an image, you accept our <span>Terms</span></small>
+          <button className="modal-btn">Save</button>
+        </div>
+        <div className="modal-close">X</div>
       </div> 
     </div>
   )

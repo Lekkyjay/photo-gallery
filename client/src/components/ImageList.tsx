@@ -1,20 +1,11 @@
 import { FC, useState } from "react"
 import { VscAdd } from "react-icons/vsc";
 import Image from "./Image"
-
-interface Item {
-  fileName: string,
-  fileSize: number,
-  imgWidth: number,
-  imgHeight: number,
-  imgDesc: string,
-  imgData: string
-}
+import { Item } from '../Interfaces/Item'
 
 interface Props {
   images: Item[]
 }
-
 
 const ImageList: FC = () => {
   const [images, setImages] = useState<Item[]>([
