@@ -4,10 +4,11 @@ import Image from "./Image"
 import { Item } from '../Interfaces/Item'
 
 interface Props {
-  images: Item[]
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ImageList: FC = () => {
+const ImageList: FC<Props> = ({ isOpen, setIsOpen }) => {
   const [images, setImages] = useState<Item[]>([
     {
       fileName: 'Apple',
@@ -44,7 +45,7 @@ const ImageList: FC = () => {
   ])
 
   const openModal = () => {
-    console.log('Modal opened')
+    setIsOpen(true)
   }  
 
   return (
