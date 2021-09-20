@@ -50,16 +50,18 @@ h1.heading {
 }
 
 .gallery {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
   margin-bottom: 40px;
-  position: relative;
 }
 
 .gallery .item {
-  background: var(--lime);
   position: relative;
+  background: var(--lime);
+  border-radius: 5%;
+  padding: 10px;
 }
 
 .gallery .item img {
@@ -68,19 +70,21 @@ h1.heading {
 
 .gallery .item .item-overlay {
   position: absolute;
-  display: none;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 5%;
   background: #000;
-  opacity: 0.8;
   z-index: 1;
   color: #fff;
-  padding: 10px;
+  padding: 10px;  
+  opacity: 0;
+	transition: opacity 0.3s ease-in;
 }
 
 .gallery .item:hover .item-overlay {
-  display: block;
+  opacity: 0.8;
 }
 
 .gallery .item .item-desc {
@@ -101,9 +105,10 @@ h1.heading {
 .gallery .item-overlay .item-link {
   position: absolute;
   top: 12px;
-  right: 12px;
+  right: 20px;
   z-index: 5;
   width: 30px;
+  cursor: pointer;
 }
 
 .open-modal {
@@ -112,7 +117,6 @@ h1.heading {
   align-items: center;
   font-size: 100px;
   cursor: pointer;
-  border: 1px solid red;
 }
 
 .app {
@@ -120,7 +124,7 @@ h1.heading {
   height: 100vh;
 }
 
-.add-image-modal-overlay {
+.modal-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -130,7 +134,7 @@ h1.heading {
   display: none;
 }
 
-.add-image-modal {
+.modal-content {
   position: absolute;
   width: 400px;
   height: 380px;
@@ -144,20 +148,22 @@ h1.heading {
   justify-content: space-between;
 }
 
-.add-image-modal .add-image-icon {
+.modal-content .add-image-icon {
   display: inline-block;
   font-size: 40px;
   background: var(--lime);
   padding: 20px;
+  border-radius: 5%;
+  cursor: pointer;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .gallery {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .gallery {
     grid-template-columns: 1fr;
   }

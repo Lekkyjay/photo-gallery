@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC, useState } from 'react'
 import { Item } from '../App'
 
 interface Props {
@@ -6,6 +6,29 @@ interface Props {
 }
 
 const Image: FC<Props> = ({ image }) => {
+  const [isCopied, setIsCopied] = useState(false)
+
+  const handleCopy =() => {
+    copyTextToClipboard(image.imgData)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const copyTextToClipboard = async (text: string) => {
+    if ('clipboard' in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand('copy', true, text);
+    }
+  }
+
   return (
     <div className="item">
       <img src={image.imgData} alt="" />
@@ -35,7 +58,10 @@ const Image: FC<Props> = ({ image }) => {
             In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.
           </p>
         </div>
-        <img src="./images/link.svg" className="item-link" alt="" />
+        {isCopied ? 
+          <span className="item-link">Copied</span> :
+          <img src="./images/link.svg" className="item-link" alt="" onClick={handleCopy}/>
+        }
       </div>      
     </div>
   )

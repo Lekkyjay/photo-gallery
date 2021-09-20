@@ -1,6 +1,5 @@
 import { FC, useState } from "react"
 import { VscAdd } from "react-icons/vsc";
-import AddNew from "./AddNew"
 import Image from "./Image"
 
 interface Item {
@@ -55,15 +54,11 @@ const ImageList: FC = () => {
 
   const openModal = () => {
     console.log('Modal opened')
-  }
-
-  
-  
+  }  
 
   return (
     <>
       <div className="gallery">
-        {/* <AddNew onClick={openModal}/> */}
         <div className="item open-modal" onClick={openModal}>
           <VscAdd />
         </div>

@@ -1,9 +1,7 @@
-import { NONAME } from 'dns';
-import { useRef, useState } from 'react';
-import { VscAdd } from "react-icons/vsc";
+import { useState } from 'react';
 import './App.css';
-import AddNew from './components/AddNew';
 import ImageList from './components/ImageList';
+import ModalOverlay from './components/ModalOverlay';
 import Nav from './components/Nav';
 
 export interface Item {
@@ -51,13 +49,6 @@ const App = () => {
     }
   ])
 
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  const handleAddImage = () => {
-    console.log('icon clicked')
-    inputRef.current?.click()
-  }
-
   return (
     <div className="app">
       <Nav />
@@ -65,29 +56,7 @@ const App = () => {
         <h1 className="heading">Uploaded Images</h1>
         <ImageList />
       </div>
-
-      <div className="add-image-modal-overlay">
-        <div className="add-image-modal">
-          <h3>New Image</h3>
-          <input ref={inputRef} type="file" name="file"  style={{ display: 'none' }} onChange={handleAddImage}/>          
-          {/* <AddNew onClick={handleAddImage}/> */}
-          
-          <div className="add-image-box">
-            <div className="add-image-icon" onClick={handleAddImage}>
-              <VscAdd  />
-            </div>
-            
-            <p>
-            <small>Only jpg or png</small>
-            </p>
-          </div>
-
-          <div className="desc">
-            <p>Description</p>
-            <textarea name="desc" cols={40} rows={6}></textarea>
-          </div>
-        </div> 
-      </div>
+      <ModalOverlay />      
     </div>
   );
 }
