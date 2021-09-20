@@ -11,22 +11,19 @@ interface Props {
 
 const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
   const [fileName, setFileName] = useState('')
-  // const [file, setFile] = useState<string | ArrayBuffer | null>(null)
   const [file, setFile] = useState<File | null>(null)
-  // const [selectedFile, setSelectedFile] = useState<File>()
   const [imgPreview, setImgPreview] = useState()
+  const [imgDesc, setImgDesc] = useState('')
   const [error, setError] = useState(false)
-  const [imgDim, setImgDim] = useState<Dim | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const textRef = useRef<HTMLTextAreaElement>(null)
 
   const onChange = (e: SyntheticEvent) => {
     console.log('onchange called')
     const target = e.currentTarget as HTMLInputElement
     const selectedFile: File = (target.files as FileList)[0]
-    // const x = getImgDimension(selectedFile)
     setFile(selectedFile)
     setFileName(selectedFile.name)
-    // setImgDim(x)
     console.log(selectedFile)
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg']
 
@@ -38,33 +35,32 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
         image.onload = () => {
           const imgWidth  = image.naturalWidth
           const imgHeight = image.naturalHeight 
-          // setImgDim({imgWidth, imgHeight})
-          console.log('imgDim:', imgDim)
         }
       }    
-      reader.readAsDataURL(selectedFile)    //reads file and triggers loadend when file read operation is finished
+      reader.readAsDataURL(selectedFile) 
     } else {
       setError(true)
       console.log('selected file is not allowed')
     }
-  }
+  }  
 
-  const getImgDimension = (file: File): Dim => {
-    let imgWidth = ''
-    let imgHeight = ''
-    let reader = new FileReader()  
-    // reader.readAsDataURL(file)    
-    reader.onloadend = () => {
-      let image = new Image()
-      image.src = reader.result as string
-      image.onload = () => {
-        const imgWidth  = String(image.naturalWidth)
-        const imgHeight = String(image.naturalHeight)         
-        // setImgDim({imgWidth, imgHeight})
+  const getImgDimension = (file: File) => {
+    return new Promise<Dim>((resolve, reject) => {
+      let reader = new FileReader()  
+      reader.readAsDataURL(file)    
+      reader.onloadend = () => {
+        let image = new Image()
+        image.src = reader.result as string
+        image.onload = () => {
+          const imgWidth  = String(image.naturalWidth)
+          const imgHeight = String(image.naturalHeight)                   
+          resolve({imgWidth, imgHeight})
+        }        
       }
-    }
-    reader.readAsDataURL(file)
-    return { imgWidth, imgHeight }
+      reader.onerror = () => {
+        reject(Error('getImageDimension failed'))
+      }
+    })
   }
 
   const handleAddImage = () => {    
@@ -75,20 +71,16 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
     setFile(null)
     setIsOpen(false)
     setFileName('')
-    setImgDim(null)
   }
 
   const handleSave = async (e: FormEvent) => {
-    //call api with axios
-    //setImages
-    // console.log('file:', file)
     e.preventDefault();
-    // setImgDim(getImgDimension(file as File))
-    console.log(imgDim)
+    const imgDim = await getImgDimension(file as File)
     const formData = new FormData()
     formData.append('file', file as File)
     formData.append('imgHeight', imgDim?.imgHeight as string)
     formData.append('imgWidth', imgDim?.imgWidth as string)
+    formData.append('imgDesc', imgDesc)
     try {
       const res = await axios.post('http://localhost:5000/images/upload', formData, {
         headers: {
@@ -102,7 +94,7 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
     setFile(null)
     setIsOpen(false)
     setFileName('')
-    setImgDim(null)
+    setImgDesc('')
   }
 
   
@@ -123,7 +115,7 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
 
         <div className="desc">
           <p>Description</p>
-          <textarea name="desc" cols={40} rows={8}></textarea>
+          <textarea onChange={e=>setImgDesc(e.target.value)} value={imgDesc} name="desc" cols={40} rows={8}></textarea>
         </div>
         <div className="modal-footer">
           <small>By uploading an image, you accept our <span>Terms</span></small>

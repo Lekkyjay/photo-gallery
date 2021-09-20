@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import './App.css';
 import ImageList from './components/ImageList';
 import ModalOverlay from './components/ModalOverlay';
@@ -9,9 +10,18 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [images, setImages] = useState<Item[]>([])
 
-  const handleSave = () => {
-    //call backend with axios
-    //setImages state
+  useEffect(() => {
+    getImages()
+  }, [])
+
+  const getImages = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/images')
+      setImages(res.data)
+      console.log('results:', res.data)      
+    } catch (error) {
+      console.log('Something totally broke')
+    }
   }
 
   return (
@@ -19,7 +29,7 @@ const App = () => {
       <Nav />
       <div className="container">        
         <h1 className="heading">Uploaded Images</h1>
-        <ImageList isOpen={isOpen} setIsOpen={setIsOpen} />
+        <ImageList isOpen={isOpen} setIsOpen={setIsOpen} images={images} />
       </div>
       <ModalOverlay isOpen={isOpen} setIsOpen={setIsOpen} setImages={setImages} />
     </div>

@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors())
 app.use(fileupload({
   limits: {
-    fileSize: 1024 * 1024 * 2 // 1 MB
+    fileSize: 1024 * 1024 * 2 // 2 MB
   },
   abortOnLimit: true
 }))

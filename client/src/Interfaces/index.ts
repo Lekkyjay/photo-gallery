@@ -4,6 +4,8 @@ export interface Item {
   imgWidth: string,
   imgHeight: string,
   imgDesc: string,
+  imgSource: string,
+  uploadedAt: Date,
   imgData: string
 }
 

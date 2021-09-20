@@ -132,7 +132,6 @@ h1.heading {
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 10;
-  /* display: none; */
 }
 
 .modal-content {
@@ -175,6 +174,7 @@ h1.heading {
   border-radius: 5%;
   border: none;
   background: var(--lime);
+  cursor: pointer;
 }
 
 .modal-close {
