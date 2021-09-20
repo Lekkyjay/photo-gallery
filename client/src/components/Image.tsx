@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { Item } from '../Interfaces/Item'
+import { Item } from '../Interfaces'
 
 interface Props {
   image: Item

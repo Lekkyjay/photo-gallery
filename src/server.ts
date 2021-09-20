@@ -3,6 +3,7 @@ import fileupload from 'express-fileupload'
 import connectDB from './db/connect'
 import imgRoutes from './routes'
 import dotenv from 'dotenv'
+import cors from 'cors'
 dotenv.config()
 
 const app = express()
@@ -10,9 +11,10 @@ const app = express()
 // Middlewares
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(cors())
 app.use(fileupload({
   limits: {
-    fileSize: 1024 * 1024 * 1 // 1 MB
+    fileSize: 1024 * 1024 * 2 // 1 MB
   },
   abortOnLimit: true
 }))
