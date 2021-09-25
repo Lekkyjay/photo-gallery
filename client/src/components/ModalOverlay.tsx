@@ -12,7 +12,8 @@ interface Props {
 const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
   const [fileName, setFileName] = useState('')
   const [file, setFile] = useState<File | null>(null)
-  const [imgPreview, setImgPreview] = useState()
+  const [imgType, setImgType] = useState<string>('')
+  const [imgPreview, setImgPreview] = useState<string>('')
   const [imgDesc, setImgDesc] = useState('')
   const [error, setError] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -22,22 +23,19 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
     console.log('onchange called')
     const target = e.currentTarget as HTMLInputElement
     const selectedFile: File = (target.files as FileList)[0]
-    setFile(selectedFile)
-    setFileName(selectedFile.name)
-    console.log(selectedFile)
-    const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg']
+    const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg']    
 
     if (selectedFile && ALLOWED_TYPES.includes(selectedFile.type)) {      
+      setFile(selectedFile)
+      setFileName(selectedFile.name)
+      setImgType(selectedFile.type)
+      console.log(selectedFile)
+
       let reader = new FileReader()      
-      reader.onloadend = () => {
-        let image = new Image()
-        image.src = reader.result as string
-        image.onload = () => {
-          const imgWidth  = image.naturalWidth
-          const imgHeight = image.naturalHeight 
-        }
-      }    
       reader.readAsDataURL(selectedFile) 
+      reader.onloadend = () => {
+        setImgPreview(reader.result as string)
+      }    
     } else {
       setError(true)
       console.log('selected file is not allowed')
@@ -63,14 +61,21 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
     })
   }
 
+  const reset = () => {
+    setFile(null)
+    setIsOpen(false)
+    setFileName('')
+    setImgDesc('')
+    setImgPreview('')
+    setError(false)
+  }
+
   const handleAddImage = () => {    
     inputRef.current?.click()
   }
 
   const handleClose = () => {
-    setFile(null)
-    setIsOpen(false)
-    setFileName('')
+    reset()
   }
 
   const handleSave = async (e: FormEvent) => {
@@ -78,6 +83,7 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
     const imgDim = await getImgDimension(file as File)
     const formData = new FormData()
     formData.append('file', file as File)
+    formData.append('imgType', imgType)
     formData.append('imgHeight', imgDim?.imgHeight as string)
     formData.append('imgWidth', imgDim?.imgWidth as string)
     formData.append('imgDesc', imgDesc)
@@ -87,14 +93,12 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
           'Content-Type': 'multipart/form-data'
         }
       })
+      window.location.reload()
     } 
     catch (error) {
       console.log(error)
     }
-    setFile(null)
-    setIsOpen(false)
-    setFileName('')
-    setImgDesc('')
+    reset()
   }
 
   
@@ -106,10 +110,10 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
         
         <div className="add-image-box">
           <div className="add-image-icon" onClick={handleAddImage}>
-            <VscAdd  />
+            {imgPreview ? <img src={imgPreview} width="100px" /> : <VscAdd  />}
           </div>            
           <p>
-          <small>Only jpg or png</small>
+          <small style={{ color: error ? 'red' : 'inherit'}}>Only jpg or png</small>
           </p>
         </div>
 

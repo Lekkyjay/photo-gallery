@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
         imgWidth: result.imgWidth,
         imgHeight: result.imgHeight,
         imgDesc: result.imgDesc,
+        imgType: result.imgType,
         imgSource: result.imgSource,
         uploadedAt: result.uploadedAt,
         imgData: result.imgData.toString('base64')
@@ -47,6 +48,7 @@ router.post('/upload', async (req, res) => {
   const imgWidth = req.body.imgWidth
   const imgHeight = req.body.imgHeight
   const imgDesc = req.body.imgDesc
+  const imgType = req.body.imgType
   const imgSource = req.get('origin')
 
   const extensionName = path.extname(file.name);
@@ -57,7 +59,7 @@ router.post('/upload', async (req, res) => {
   }
 
   try {
-    const image = await File.create({ fileName, fileSize, imgWidth, imgHeight, imgDesc, imgSource, imgData })
+    const image = await File.create({ fileName, fileSize, imgWidth, imgHeight, imgDesc, imgType, imgSource, imgData })
     return res.status(200).json({ 
       msg: 'File uploaded successfuly',
       data: { fileName, fileSize, imgWidth, imgHeight, imgDesc, imgSource }

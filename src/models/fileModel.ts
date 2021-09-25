@@ -6,6 +6,7 @@ interface IFile extends Document {
   imgWidth: number,
   imgHeight: number,
   imgDesc: string,
+  imgType: string,
   imgSource: string,
   imgData: Buffer,
   uploadedAt: Date
@@ -18,6 +19,7 @@ const FileSchema = new mongoose.Schema(
     imgWidth: { type: Number, required: true },
     imgHeight: { type: Number, required: true },
     imgDesc: { type: String, required: true },
+    imgType: { type: String, required: true },
     imgSource: { type: String },
     imgData: { type: Buffer, contentType: String },
     uploadedAt: { type: Date, default: Date.now }

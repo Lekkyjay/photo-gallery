@@ -8,8 +8,12 @@ interface Props {
 const Image: FC<Props> = ({ image }) => {
   const [isCopied, setIsCopied] = useState(false)
 
+  let arrayBuffer = Buffer.from( image.imgData )
+  let blob = new Blob( [ arrayBuffer ], { type: image.imgType } )
+  let imageUrl = URL.createObjectURL(blob)
+
   const handleCopy =() => {
-    copyTextToClipboard(image.imgData)
+    copyTextToClipboard(imageUrl)
       .then(() => {
         setIsCopied(true);
         setTimeout(() => {
@@ -31,7 +35,7 @@ const Image: FC<Props> = ({ image }) => {
 
   return (
     <div className="item">
-      <img src={"data:image/png;base64" + image.imgData} alt="" />
+      <img src={ imageUrl } alt="" />
       <div className="item-overlay">
         <h3 className="item-title">{image.fileName}</h3>
         <ul className="item-list">
