@@ -64,6 +64,11 @@ h1.heading {
   padding: 10px;
 }
 
+.gallery .item.image {
+  padding: 0;
+  background: transparent;
+}
+
 .gallery .item img {
   width: 100%;
 }

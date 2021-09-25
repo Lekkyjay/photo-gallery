@@ -13,7 +13,7 @@ router.get('/test', (req, res) => {
 //get all images
 router.get('/', async (req, res) => {
   try {
-    const results = await File.find({})
+    const results = await File.find({}).sort({'uploadedAt': 'desc'})
     const files = results.map(result => (
       {
         fileName: result.fileName,
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
         imgType: result.imgType,
         imgSource: result.imgSource,
         uploadedAt: result.uploadedAt,
-        imgData: result.imgData.toString('base64')
+        imgData: result.imgData
       }
     ))
     res.status(200).json(files)

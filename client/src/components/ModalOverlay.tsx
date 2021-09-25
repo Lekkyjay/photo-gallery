@@ -34,7 +34,7 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
       let reader = new FileReader()      
       reader.readAsDataURL(selectedFile) 
       reader.onloadend = () => {
-        setImgPreview(reader.result as string)
+      setImgPreview(reader.result as string)
       }    
     } else {
       setError(true)

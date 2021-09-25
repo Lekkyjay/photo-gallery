@@ -11,6 +11,7 @@ const Image: FC<Props> = ({ image }) => {
   let arrayBuffer = Buffer.from( image.imgData )
   let blob = new Blob( [ arrayBuffer ], { type: image.imgType } )
   let imageUrl = URL.createObjectURL(blob)
+  console.log('imageUrl:', imageUrl)
 
   const handleCopy =() => {
     copyTextToClipboard(imageUrl)
@@ -34,7 +35,7 @@ const Image: FC<Props> = ({ image }) => {
   }
 
   return (
-    <div className="item">
+    <div className="item image">
       <img src={ imageUrl } alt="" />
       <div className="item-overlay">
         <h3 className="item-title">{image.fileName}</h3>

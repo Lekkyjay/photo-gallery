@@ -7,7 +7,7 @@ export interface Item {
   imgType: string,
   imgSource: string,
   uploadedAt: Date,
-  imgData: string
+  imgData: Buffer
 }
 
 export interface Dim {
