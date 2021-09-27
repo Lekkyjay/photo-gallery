@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import { UploadedFile } from 'express-fileupload'
 import path from 'path'
 import File from '../models/fileModel'
@@ -6,7 +6,7 @@ import File from '../models/fileModel'
 const router = express.Router()
 
 // test route
-router.get('/test', (req, res) => {
+router.get('/test', (req: Request, res: Response) => {
   res.send('Welcome to image api')
 })
 
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 })
 
 //upload an image
-router.post('/upload', async (req, res) => {  
+router.post('/upload', async (req: Request, res: Response) => {  
   if (!req.files || Object.keys(req.files).length === 0) {
     res.status(400).send('No file was uploaded.')
     return

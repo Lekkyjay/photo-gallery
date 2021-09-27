@@ -1,5 +1,6 @@
 import express from 'express'
 import fileupload from 'express-fileupload'
+import path from 'path'
 import connectDB from './db/connect'
 import imgRoutes from './routes'
 import dotenv from 'dotenv'
@@ -11,6 +12,7 @@ const app = express()
 // Middlewares
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(express.static('./client/build'))
 app.use(cors())
 app.use(fileupload({
   limits: {
@@ -24,6 +26,10 @@ connectDB()
 
 // Routes
 app.use('/images', imgRoutes)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"))
+})
 
 const PORT = process.env.PORT || 5000;
 
