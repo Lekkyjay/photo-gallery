@@ -20,7 +20,7 @@ const App = () => {
       setImages(res.data)
       console.log('results:', res.data)      
     } catch (error) {
-      console.log('Something totally broke')
+      console.log('Something totally broke', error)
     }
   }
 
