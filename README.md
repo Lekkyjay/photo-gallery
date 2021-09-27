@@ -6,3 +6,4 @@
 * dotenv: A lightweight npm package that automatically loads environment variables from a . env file into the process. env object.
 * express-fileupload: Simple express middleware for uploading files.
 * mongoose: An Object Data Modeling (ODM) library for MongoDB and Node. js.
+* Express: A minimal and flexible Node.js web application framework.
