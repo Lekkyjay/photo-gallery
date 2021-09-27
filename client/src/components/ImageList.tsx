@@ -10,48 +10,6 @@ interface Props {
 }
 
 const ImageList: FC<Props> = ({ isOpen, setIsOpen, images }) => {
-  // const images = [
-  //   {
-  //     fileName: 'Apple',
-  //     fileSize: 1220000,
-  //     imgWidth: '1280',
-  //     imgHeight: '1200',
-  //     imgDesc: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content',
-  //     imgData: './images/lime.svg',
-  //     imgSource: 'localhost:3000',
-  //     uploadedAt: new Date('2021-09-17T17:39:34.888+00:00')
-  //   },
-  //   {
-  //     fileName: 'ApplOrange',
-  //     fileSize: 1220000,
-  //     imgWidth: '1280',
-  //     imgHeight: '1200',
-  //     imgDesc: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content',
-  //     imgData: './images/lime.svg',
-  //     imgSource: 'localhost:3000',
-  //     uploadedAt: new Date('2021-09-17T17:39:34.888+00:00')
-  //   },
-  //   {
-  //     fileName: 'Banana',
-  //     fileSize: 1220000,
-  //     imgWidth: '1280',
-  //     imgHeight: '1200',
-  //     imgDesc: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content',
-  //     imgData: './images/lime.svg',
-  //     imgSource: 'localhost:3000',
-  //     uploadedAt: new Date('2021-09-17T17:39:34.888+00:00')
-  //   },
-  //   {
-  //     fileName: 'Mongo',
-  //     fileSize: 1220000,
-  //     imgWidth: '1280',
-  //     imgHeight: '1200',
-  //     imgDesc: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content',
-  //     imgData: './images/lime.svg',
-  //     imgSource: 'localhost:3000',
-  //     uploadedAt: new Date('2021-09-17T17:39:34.888+00:00')
-  //   }
-  // ]
 
   const openModal = () => {
     setIsOpen(true)

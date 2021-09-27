@@ -10,14 +10,12 @@ interface Props {
 }
 
 const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
-  const [fileName, setFileName] = useState('')
   const [file, setFile] = useState<File | null>(null)
   const [imgType, setImgType] = useState<string>('')
   const [imgPreview, setImgPreview] = useState<string>('')
   const [imgDesc, setImgDesc] = useState('')
   const [error, setError] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const textRef = useRef<HTMLTextAreaElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)  
 
   const onChange = (e: SyntheticEvent) => {
     console.log('onchange called')
@@ -27,7 +25,6 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
 
     if (selectedFile && ALLOWED_TYPES.includes(selectedFile.type)) {      
       setFile(selectedFile)
-      setFileName(selectedFile.name)
       setImgType(selectedFile.type)
       console.log(selectedFile)
 
@@ -64,7 +61,6 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
   const reset = () => {
     setFile(null)
     setIsOpen(false)
-    setFileName('')
     setImgDesc('')
     setImgPreview('')
     setError(false)
