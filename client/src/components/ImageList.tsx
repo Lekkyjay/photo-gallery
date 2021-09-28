@@ -24,7 +24,7 @@ const ImageList: FC<Props> = ({ isOpen, setIsOpen, images }) => {
 
         {images.length > 0 
         ? images.map((image, index) => (<Image key={index} image={image}/>)) 
-        : <h3>No images to display</h3>
+        : <h3>Loading images to display ...</h3>
         }             
       </div>      
     </>

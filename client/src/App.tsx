@@ -9,6 +9,7 @@ import { Item } from './Interfaces';
 const App = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [images, setImages] = useState<Item[]>([])
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     getImages()
@@ -16,10 +17,12 @@ const App = () => {
 
   const getImages = async () => {
     try {
+      setError(false)
       const res = await axios.get('/images')
       setImages(res.data)
       console.log('results:', res.data)      
     } catch (error) {
+      setError(true)
       console.log('Something totally broke', error)
     }
   }
@@ -29,7 +32,10 @@ const App = () => {
       <Nav />
       <div className="container">        
         <h1 className="heading">Uploaded Images</h1>
-        <ImageList isOpen={isOpen} setIsOpen={setIsOpen} images={images} />
+        {error 
+          ? <h3>Error</h3>
+          : <ImageList isOpen={isOpen} setIsOpen={setIsOpen} images={images} />
+        }        
       </div>
       <ModalOverlay isOpen={isOpen} setIsOpen={setIsOpen} setImages={setImages} />
     </div>
