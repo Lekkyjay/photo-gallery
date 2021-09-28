@@ -36,7 +36,7 @@ const Image: FC<Props> = ({ image }) => {
 
   return (
     <div className="item image">
-      <img src={ imageUrl } alt="" />
+      <img src={ imageUrl } alt="gallery image" />
       <div className="item-overlay">
         <h3 className="item-title">{image.fileName}</h3>
         <ul className="item-list">
