@@ -84,7 +84,7 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
     formData.append('imgWidth', imgDim?.imgWidth as string)
     formData.append('imgDesc', imgDesc)
     try {
-      const res = await axios.post('/images/upload', formData, {
+      const res = await axios.post('http://localhost:5000/images/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

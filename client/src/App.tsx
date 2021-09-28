@@ -16,7 +16,7 @@ const App = () => {
 
   const getImages = async () => {
     try {
-      const res = await axios.get('/images')
+      const res = await axios.get('http://localhost:5000/images')
       setImages(res.data)
       console.log('results:', res.data)      
     } catch (error) {
