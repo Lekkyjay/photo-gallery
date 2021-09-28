@@ -33,7 +33,7 @@ const App = () => {
       <div className="container">        
         <h1 className="heading">Uploaded Images</h1>
         {error 
-          ? <h3>Error</h3>
+          ? <h3>Server is down at the moment please come back later.</h3>
           : <ImageList isOpen={isOpen} setIsOpen={setIsOpen} images={images} />
         }        
       </div>
