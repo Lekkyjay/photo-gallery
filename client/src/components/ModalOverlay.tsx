@@ -106,7 +106,7 @@ const ModalOverlay: FC<Props> = ({ isOpen, setIsOpen, setImages }) => {
         
         <div className="add-image-box">
           <div className="add-image-icon" onClick={handleAddImage}>
-            {imgPreview ? <img src={imgPreview} width="100px" /> : <VscAdd  />}
+            {imgPreview ? <img src={imgPreview} width="100px" alt="image preview" /> : <VscAdd  />}
           </div>            
           <p>
           <small style={{ color: error ? 'red' : 'inherit'}}>Only jpg or png</small>

@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { VscAdd } from "react-icons/vsc";
 import { Item } from "../Interfaces";
 import Image from "./Image"
