@@ -59,7 +59,7 @@ const Image: FC<Props> = ({ image }) => {
         </ul>
         <div className="item-desc">
           <h3>Description</h3>
-          <p>{image.imgDesc}</p>
+          <p>{image.imgDesc.substring(1, 100)}</p>
         </div>
         {isCopied 
         ? <span className="item-link">Copied</span> 
